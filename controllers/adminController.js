@@ -20,23 +20,23 @@ const getDonarListController = async (req, res) => {
   }
 };
 // HOSPITAL LIST
-const getHospitalListController = async (req, res) => {
+const getHospitalDataController = async (req, res) => {
   try {
-    const donarData = await userModel
-      .find({ role: "donar" })
+    const hospitalData = await userModel
+      .find({ role: "hospital" })
       .sort({ createdAt: -1 });
     return res.status(200).send({
       success: true,
-      Totalcount: donarData.length,
+      Totalcount: hospitalData.length,
       message: "Hospital list fetch successfully",
-      donarData,
+      hospitalData,
     });
   } catch (error) {
     return res.status(500).send({
       success: false,
-      message: "Error in donar list",
+      message: "Error in hospital list",
       error,
     });
   }
 };
-module.exports = { getDonarListController, getHospitalListController };
+module.exports = { getDonarListController, getHospitalDataController };
