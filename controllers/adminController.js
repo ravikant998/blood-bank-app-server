@@ -39,4 +39,24 @@ const getHospitalDataController = async (req, res) => {
     });
   }
 };
-module.exports = { getDonarListController, getHospitalDataController };
+///  Org List
+const getOrgDataController = async (req, res) => {
+  try {
+    const orgData = await userModel
+      .find({ role: "organisation" })
+      .sort({ createdAt: -1 });
+    return res.status(200).send({
+      success: true,
+      Totalcount: orgData.length,
+      message: "Org list fetch successfully",
+      orgData,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: "Error in org list",
+      error,
+    });
+  }
+};
+module.exports = { getDonarListController, getHospitalDataController,getOrgDataController };
